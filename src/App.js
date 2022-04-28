@@ -6,12 +6,12 @@ import TodoList from './TodoList';
 import { v4 as uuidv4 } from 'uuid';
 
 // create location for storing todos
-const LOCAL_STORAGE_KEY = 'todoApp.todos'
+const LOCAL_STORAGE_KEY = 'todoApp.todos';
 
 function App() {
   
   //updates our todos // one default todo
-  const [todos, setTodos] = useState([{id: uuidv4(), name: "Todo 1", complete: false}])
+  const [todos, setTodos] = useState([ { id: uuidv4(), name: 'Todo-Default', complete: false }  ])
   // accesing our textbox
   const todoNameRef = useRef()
   
@@ -19,13 +19,13 @@ function App() {
   useEffect( () => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
     if (storedTodos) setTodos(storedTodos)
-    console.log('loaded items : \r\n' + localStorage.key(LOCAL_STORAGE_KEY));
+    console.log('loaded items : \r\n' + storedTodos)
   }, [])
   
-  // create local storage to save our todos
+  // save our todos to local storage
   useEffect( () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
-    console.log('store items : \r\n' + localStorage.key(LOCAL_STORAGE_KEY).value);
+    console.log('store items : \r\n' + JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)))
   }, [todos])
 
   // function for the onclick that toggle checkbox
